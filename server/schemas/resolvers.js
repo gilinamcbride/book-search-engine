@@ -42,12 +42,14 @@ const resolvers = {
     },
     saveBook: async (parent, args, context) => {
       if (context.user) {
+        console.log(context.user);
+        console.log(args.input);
         let updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: args.input } },
+          { $push: { savedBooks: args.input } },
           { new: true }
         );
-
+        console.log(updatedUser);
         return updatedUser;
       }
 
