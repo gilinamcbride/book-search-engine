@@ -56,7 +56,7 @@ This app is a fully functioning Google Books API search engine refactored to be 
 ![Screenshot of application](./client/assets/screenshot1.png)
 ![Screenshot of application](./client/assets/screenshot2.png)
 
-[Link to deployed Application](https://gilinamcbride.github.io/react-portfolio/)
+[Link to deployed Application](https://blooming-depths-70553.herokuapp.com/)
 
 ## Questions?
 
