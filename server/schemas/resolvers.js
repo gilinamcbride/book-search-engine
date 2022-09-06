@@ -6,16 +6,18 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('savedBooks');
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          '-__v -password'
+        );
+        // .populate('savedBooks');
+        console.log(userData);
         return userData;
       }
       throw new AuthenticationError('Not logged in');
     },
-    users: async () => {
-      return User.find().select('-__v -password').populate('savedBooks');
-    },
+    // users: async () => {
+    //   return User.find().select('-__v -password').populate('savedBooks');
+    // },
   },
   Mutation: {
     addUser: async (parent, args) => {

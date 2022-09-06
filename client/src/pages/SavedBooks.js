@@ -8,20 +8,16 @@ import {
 } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import { useParams } from 'react-router-dom';
 import { REMOVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const { username: userParam } = useParams();
+  const { data } = useQuery(GET_ME);
+  const userData = data?.me || data?.user || {};
 
   const [removeBook] = useMutation(REMOVE_BOOK);
-  const { data } = useQuery(GET_ME, {
-    variables: { username: userParam },
-  });
 
-  const userData = data?.me || data?.user || {};
   const userDataLength = Object.keys(userData).length;
 
   const handleDeleteBook = async (bookId) => {
@@ -33,7 +29,7 @@ const SavedBooks = () => {
 
     try {
       await removeBook({
-        variables: { _id: bookId },
+        variables: { bookId: bookId },
       });
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
